@@ -8,10 +8,6 @@ defineProps({
         type: String,
         default: "",
     },
-    type: {
-        type: String,
-        default: "text",
-    },
 });
 </script>
 
@@ -25,19 +21,19 @@ defineProps({
 
     <div class="relative mt-1 rounded-md shadow-md">
         <div
-           class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+           class="pointer-events-none absolute top-3 left-0 flex items-center pl-3">
            <span class="grid place-content-center text-xl text-indigo-900">
             <i :class="`fa-solid fa-${icon}`"></i>
            </span>
         </div>
-        <input
-          :type="type"
+        <textarea
+          rows="6"
           :name="label"
           :placeholder="placeholder"
           v-model="model"
           class="block w-full rounded-md pr-3 pl-9 text-sm dark:text-slate-900 focus:border-slate-300
           outline-0 focus:ring-1 focus:ring-inset focus:ring-indigo-400 focus: border-indigo-400 placeholder:text-slate-400"
-          />
+        ></textarea>
     </div>
   </div>
 </template>

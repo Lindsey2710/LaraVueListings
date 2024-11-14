@@ -38,6 +38,10 @@ const show = ref(false);
                     border-indigo-700 border overflow-hidden w-40">
 
                     <Link
+                        :href="route('listing.create')"
+                        class="block w-full px-6 py-3 hover:bg-indigo-950 text-left">New List Item</Link>
+
+                    <Link
                         :href="route('profile.edit')"
                         class="block w-full px-6 py-3 hover:bg-indigo-950 text-left">Profile</Link>
 
