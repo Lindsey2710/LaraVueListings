@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +17,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::inertia('/', 'Home')->name('home');
+//---- start with this route first and after auth etc, change Route::inertia('/', 'Home')->name('home'); to this one----//
+Route::get('/', [ListingController::class, 'index'])->name('home');
+//------ php artisan route:list will show all these routes by just adding this line here after
+//------ running this command -> php artisan make:model ListingController -a ------//
+Route::resource('listing', ListingController::class)->except('index');
+
 
 // imported routes from self created Auth.php file
 require __DIR__ . '/auth.php';

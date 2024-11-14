@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .text-link {
+        @apply text-purple-700 hover:text-indigo-900 font-medium underline
+        dark:text-purple-100 dark:hover:text-purple-400;
+    }
+}
+
+
+

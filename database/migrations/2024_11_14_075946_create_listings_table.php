@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
+            //if user is deleted, their listings will be deleted as well when using cascade
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('title');
+            $table->text('desc');
+            $table->string('tags')->nullable();
+            $table->string('email')->nullable();
+            $table->string('link')->nullable();
+            $table->string('image')->nullable();
+            // if you want that the admin approves a listing before it is shown to the public
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

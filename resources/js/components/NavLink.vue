@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <Link :href="route(routeName)" class="px-3 py-2 rounded-lg hover:bg-indigo-950"
+    <Link :href="route(routeName)" class="px-3 py-2 rounded-lg hover:bg-indigo-700"
         :class="{ 'bg-indigo-700': $page.component === componentName }">
     <slot />
     </Link>
