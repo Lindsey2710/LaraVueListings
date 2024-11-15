@@ -30,7 +30,7 @@ const selectTag = (tag) => {
 
     <div>
         <!-- Image goes here -->
-         <Link href="">
+         <Link :href="route('listing.show', listing.id)">
             <img
                 :src="listing.image
                 ? `/storage/${listing.image}`
