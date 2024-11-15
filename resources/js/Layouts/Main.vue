@@ -22,7 +22,8 @@ const show = ref(false);
                  <div v-if="user" class="relative">
                  <div
                     @click="show = !show"
-                    class="flex items-center gap-2 px-3 py-1 rounded-lg hover:bg-indigo-950 cursor-pointer"
+                    class="flex items-center gap-2 px-3 py-1 rounded-lg
+                    hover:bg-indigo-950 cursor-pointer hover:outline outline-indigo-700 outline-offset-2"
                     :class="{'bg-indigo-950' : show}">
                     <!-- Get the username via usePage and computed in script-->
                     <p>{{ user.name }}</p>
@@ -39,15 +40,15 @@ const show = ref(false);
 
                     <Link
                         :href="route('listing.create')"
-                        class="block w-full px-6 py-3 hover:bg-indigo-950 text-left">New List Item</Link>
+                        class="block w-full px-6 py-3 hover:bg-indigo-950 hover:outline outline-indigo-700 outline-offset-2 text-left">New List Item</Link>
 
                     <Link
                         :href="route('profile.edit')"
-                        class="block w-full px-6 py-3 hover:bg-indigo-950 text-left">Profile</Link>
+                        class="block w-full px-6 py-3 hover:bg-indigo-950 hover:outline outline-indigo-700 outline-offset-2 text-left">Profile</Link>
 
                     <Link
                         :href="route('dashboard')"
-                        class="block w-full px-6 py-3 hover:bg-indigo-950 text-left">Dashboard</Link>
+                        class="block w-full px-6 py-3 hover:bg-indigo-950 hover:outline outline-indigo-700 outline-offset-2 text-left">Dashboard</Link>
 
                     <Link
                         :href="route('logout')"
@@ -67,7 +68,7 @@ const show = ref(false);
 
                 <!-- Dark or light mode -->
                 <button @click="switchTheme"
-                    class="hover:bg-slate-700 w-6 h-6 grid place-items-center rounded-full hover:outline hover:outline-1 outline-white">
+                    class="hover:bg-yellow-200 w-6 h-6 grid place-items-center rounded-full hover:outline hover:outline-2 outline-yellow-500">
                     <i class="fa-solid fa-lightbulb"></i>
                 </button>
             </div>
