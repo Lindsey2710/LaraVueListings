@@ -60,7 +60,7 @@ const form = useForm({
                      />
 
                 <Inputfield
-                    label="ExternalLink"
+                    label="External Link"
                     icon="globe"
                     placeholder="https://www.mywebsite.com"
                     v-model="form.link"

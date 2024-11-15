@@ -12,8 +12,6 @@ const deleteListing = () => {
     if  (confirm('Are you sure you want to delete this list item?')) {
         router.delete(route('listing.destroy', props.listing.id));
     }
-
-
 }
 </script>
 
