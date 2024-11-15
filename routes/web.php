@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
+
+//---------------------- PROFILE ROUTES ----------------------//
 //------ middleware['auth'] is applied to all routes here cuz of group-> ----//
 Route::middleware(['auth'])->group(function () {
 //---- the verified middleware is only for protected routes so user must provide password to access this page ----//
@@ -17,11 +21,27 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//---- start with this route first and after auth etc, change Route::inertia('/', 'Home')->name('home'); to this one----//
+
+
+//---------------------- LISTING ROUTES ----------------------//
+//---- start with this Route::inertia('/', 'Home')->name('home'); first and after auth etc, change it to this one----//
 Route::get('/', [ListingController::class, 'index'])->name('home');
+
+
 //------ php artisan route:list will show all these routes by just adding this line here after
 //------ running this command -> php artisan make:model ListingController -a ------//
 Route::resource('listing', ListingController::class)->except('index');
+
+
+
+
+//---------------------- ADMIN ROUTES ----------------------//
+//------ Admin routes wrapped in a middleware group (Admin::class) and no need to repeat AdminController::class for the routes ------//
+Route::middleware(['auth', 'verified', Admin::class])
+    ->controller(AdminController::class)
+    ->group(function () {
+    Route::get('/admin', 'index')->name('admin.index');
+});
 
 
 // imported routes from self created Auth.php file

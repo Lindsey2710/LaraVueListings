@@ -35,8 +35,8 @@ const deleteListing = (id) => {
                 </div>
 
                 <!-- Table -->
-                <table class="w-full table-fixed border-collapse overflow-hidden rounded-md
-            text-sm ring-2 ring-indigo-300 dark:ring-indigo-800 bg-white shadow-2xl">
+                <table class="w-full table-fixed border-collapse overflow-hidden rounded-lg
+                            text-sm ring-2 ring-indigo-300 dark:ring-indigo-800 bg-white shadow-2xl">
                     <thead
                         class="bg-indigo-200 text-xs uppercase dark:bg-indigo-900 text-indigo-950 dark:text-indigo-200">
                         <tr>
@@ -50,7 +50,7 @@ const deleteListing = (id) => {
                     <tbody>
 
                         <tr v-for="listing in listings.data" :key="listing.id" class="border-b border-indigo-200 hover:bg-indigo-300 dark:bg-indigo-800
-                dark:hover:bg-indigo-600 dark:border-indigo-600">
+                                                        dark:hover:bg-indigo-600 dark:border-indigo-600">
 
                             <td class="w-3/4 p-3 text-left">
                                 <div class="flex items-center gap-2">

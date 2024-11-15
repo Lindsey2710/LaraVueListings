@@ -6,19 +6,20 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class NotSuspended
+class Admin
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request):
-     *  (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->role === 'suspended')
+
+        //isAdmin function made in Model/User.php
+        if (!$request->user()->isAdmin())
         {
-            return redirect()->route('dashboard');
+            return redirect()->route('home');
         }
 
         return $next($request);

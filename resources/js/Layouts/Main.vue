@@ -14,12 +14,13 @@ const show = ref(false);
     <!-- Overlay dropdown so click anywhere on the page and the dropdown disappears -->
     <div v-show="show" @click="show = false" class="fixed inset-0 z-40"></div>
 
-    <header class="bg-slate-800 text-white">
+    <header class="bg-indigo-950 text-white">
         <nav class="p-6 mx-auto max-w-screen-lg flex items-center justify-between">
             <NavLink routeName="home" componentName="Home">Home</NavLink>
 
             <div class="flex items-center space-x-6">
-                 <div v-if="user" class="relative">
+                <!-- If logged in -->
+                 <div v-if="user" class="relative flex items-center gap-4">
                  <div
                     @click="show = !show"
                     class="flex items-center gap-2 px-3 py-1 rounded-lg
@@ -29,6 +30,13 @@ const show = ref(false);
                     <p>{{ user.name }}</p>
                     <i class="fa-solid fa-angle-down"></i>
                  </div>
+
+                 <Link
+                    v-if="user.role === 'admin'"
+                    :href="route('admin.index')"
+                    class="w-6 h-6 grid place-items-center rounded-full hover:bg-indigo-950 hover:outline outline-indigo-700 outline-offset-2">
+                    <i class="fa-solid fa-lock"></i>
+                </Link>
 
                  <!-- Dropdown menu for user-->
                  <div
