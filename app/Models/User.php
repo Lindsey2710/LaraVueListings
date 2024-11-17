@@ -12,14 +12,13 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
+     * add everything here what may change like name, email, role etc
      */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -53,6 +52,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin()
     {
-        return $this->role === 'admin'; 
+        return $this->role === 'admin';
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['search'] ?? false) {
+            $query->where(function ($q) {
+                $q->where('name', 'like', '%' . request('search') . '%')
+                    ->orWhere('email', 'like', '%' . request('search') . '%');
+            });
+        } 
     }
 }
