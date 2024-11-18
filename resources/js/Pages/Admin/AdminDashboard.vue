@@ -29,7 +29,7 @@ const toggleRole = (e) => {
         router.get(
             route("admin.index", {
                 search: params.search,
-                user_role: "suspended",
+                user_role: 'suspended',
             })
         );
     } else {
@@ -75,7 +75,7 @@ const toggleRole = (e) => {
         <!-- Toggle role btn -->
         <div class="flex items-center gap-1 text-xs hover:bg-indigo-200 dark:hover:bg-indigo-400 px-2 py-1 rounded-md">
             <input
-            @input="toggleRole"
+                @input="toggleRole"
                 :checked="params.user_role"
                 type="checkbox"
                 id="toggleRole"
