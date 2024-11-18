@@ -1,9 +1,9 @@
 <script setup>
-import { router, useForm } from "@inertiajs/vue3";
+import { router, Link, useForm } from "@inertiajs/vue3";
 import Title from "../../Components/Title.vue";
-import InputField from "../../Components/InputField.vue";
-import PaginationLinks from "../../Components/PaginationLinks.vue";
-import SessionMessages from "../../Components/SessionMessages.vue";
+import InputField from "../../components/InputField.vue";
+import SessionMessages from "../../components/SessionMessages.vue";
+import PaginationLinks from "../../components/PaginationLinks.vue";
 
 const props = defineProps({
     user: Object,
@@ -46,8 +46,8 @@ const showDisapproved = (e) => {
 
 const toggleApprove = (listing) => {
     let msg = listing.approved
-        ? "Disapprove this listing?"
-        : "Approve this listing?";
+        ? "Disapprove this list item?"
+        : "Approve this list item?";
 
     if (confirm(msg)) {
         router.put(route("admin.approve", listing.id));
@@ -113,17 +113,17 @@ const toggleApprove = (listing) => {
 
     <!-- Table -->
     <table
-        class="bg-white dark:bg-slate-800 w-full rounded-lg overflow-hidden ring-1 ring-slate-300"
+        class="bg-white dark:bg-indigo-800 w-full rounded-lg overflow-hidden ring-1 ring-indigo-100"
     >
         <thead>
-            <tr class="bg-slate-600 text-slate-300 uppercase text-xs text-left">
+            <tr class="bg-indigo-500 text-indigo-100 uppercase text-xs text-left">
                 <th class="w-4/6 p-3">Title</th>
                 <th class="w-2/6 p-3 text-center">Approved</th>
                 <th class="w-1/6 p-3 text-right">View</th>
             </tr>
         </thead>
 
-        <tbody class="divide-y divide-slate-300 divide-dashed">
+        <tbody class="divide-y divide-indigo-100 divide-dashed">
             <tr v-for="listing in listings.data" :key="listing.id">
                 <td class="py-5 px-3">{{ listing.title }}</td>
 
@@ -132,8 +132,8 @@ const toggleApprove = (listing) => {
                         <i
                             :class="`fa-solid fa-${
                                 listing.approved
-                                    ? 'circle-check text-green-400'
-                                    : 'circle-xmark text-red-400'
+                                    ? 'circle-check text-green-500'
+                                    : 'circle-xmark text-orange-500'
                             }`"
                         ></i>
                     </button>

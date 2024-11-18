@@ -104,8 +104,7 @@ class ListingController extends Controller implements HasMiddleware
         return Inertia::render('Listing/Show', [
             'listing' => $listing,
             'user' => $listing->user->only(['name', 'id']),
-            'canModify' => Auth::user() ? Auth::user()->can('modify', $listing)
-            : false
+            'canModify' => Auth::user() ? Auth::user()->can('modify', $listing) : false
         ]);
     }
 

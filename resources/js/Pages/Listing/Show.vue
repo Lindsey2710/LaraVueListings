@@ -5,19 +5,39 @@ import Container from '../../components/Container.vue';
 const props = defineProps({
     listing: Object,
     user: Object,
-    canModify: Boolean
+
 });
 
 const deleteListing = () => {
     if  (confirm('Are you sure you want to delete this list item?')) {
         router.delete(route('listing.destroy', props.listing.id));
     }
-}
+};
+
+const toggleApprove = () => {
+    let msg = props.listing.approved
+        ? "Disapprove this listing?"
+        : "Approve this listing?";
+
+    if (confirm(msg)) {
+        router.put(route("admin.approve", props.listing.id));
+    }
+};
 </script>
 
 <template>
-
     <Head title=" - item details" />
+
+    <!-- Admin -->
+    <div v-if="$page.props.auth.user && $page.props.auth.user.role === 'admin'"
+        class="bg-indigo-950 text-white mb-6 p-6 rounded-md flex items-center justify-between">
+           <p class="font-bold">This list item is {{ listing.approved ? 'Approved' : 'Disapproved' }}</p>
+           <button @click.prevent="toggleApprove" class="bg-indigo-400 px-3 py-1 rounded-md">
+                {{ listing.approved ? 'Disapprove it' : 'Approve it' }}
+           </button>
+    </div>
+
+
     <Container class="flex gap-4">
         <div class="w-1/4 rounded-md overflow-hidden">
             <img :src="listing.image

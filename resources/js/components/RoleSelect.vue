@@ -21,7 +21,7 @@ const submit = () => {
             <select
                 v-model="form.role"
                 name="roles"
-                class="text-slate-800 bg-slate-200 text-xs py-1 border-0 outline-0 rounded-lg"
+                class="text-slate-800 bg-indigo-200 text-xs py-1 border-0 outline-0 rounded-lg"
             >
                 <option value="admin">Admin</option>
 
