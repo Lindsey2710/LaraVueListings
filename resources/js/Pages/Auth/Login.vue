@@ -6,7 +6,6 @@ import InputField from '../../components/InputField.vue';
 import PrimaryBtn from '../../components/PrimaryBtn.vue';
 import ErrorMessages from '../../components/ErrorMessages.vue';
 import SessionMessages from '../../components/SessionMessages.vue';
-import Checkbox from '../../components/Checkbox.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const form = useForm({

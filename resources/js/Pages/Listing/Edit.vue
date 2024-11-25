@@ -2,7 +2,7 @@
 import Container from '../../components/Container.vue';
 import Title from '../../components/Title.vue';
 import Inputfield from '../../components/InputField.vue';
-import Textarea from '../../components/Textarea.vue';
+import TextArea from '../../components/TextArea.vue';
 import ImageUpload from '../../components/ImageUpload.vue';
 import ErrorMessages from '../../components/ErrorMessages.vue';
 import PrimaryBtn from '../../components/PrimaryBtn.vue';
@@ -48,7 +48,7 @@ const form = useForm({
                     placeholder="books, movies, websites"
                     v-model="form.tags"
                      />
-                <Textarea
+                <TextArea
                     label="Description"
                     icon="file-lines"
                     placeholder="This Is The Description"

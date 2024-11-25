@@ -1,6 +1,6 @@
 <script setup>
 import { router, Link, useForm } from "@inertiajs/vue3";
-import Title from "../../Components/Title.vue";
+import Title from "../../components/Title.vue";
 import InputField from "../../components/InputField.vue";
 import SessionMessages from "../../components/SessionMessages.vue";
 import PaginationLinks from "../../components/PaginationLinks.vue";
