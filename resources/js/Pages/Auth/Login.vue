@@ -27,12 +27,13 @@ const submit = () => {
 
 <template>
     <Head title=" - Login" />
-    <!-- Container and the others get imported after creating it in components -->
-    <Container class="w-1/2">
+    <Container class="w-full md:w-2/3 lg:w-1/2 px-4">
         <div class="mb-8 text-center">
-            <Title>Login to your account </Title>
+            <Title class="text-xl md:text-2xl break-words">
+                Login to your account
+            </Title>
             <p>
-                Need an account?
+                Don't have an account yet?
                 <TextLink routeName="register" label="Register" />
             </p>
         </div>
@@ -41,7 +42,7 @@ const submit = () => {
          <ErrorMessages :errors="form.errors" />
          <SessionMessages :status="status" />
 
-        <form @submit.prevent="submit" class="space-y-6">
+        <form @submit.prevent="submit" class="space-y-6 max-w-full">
 
             <InputField label="Email" icon="envelope" type="email" v-model="form.email" />
 
