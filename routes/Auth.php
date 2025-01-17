@@ -1,50 +1,24 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticateController;
-use App\Http\Controllers\Auth\ConfirmPasswordController;
-use App\Http\Controllers\Auth\EmailVerificationController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
-//import this document in web.php
-
-// Guest middleware
 Route::middleware('guest')->group(function () {
-    //------ Registration Routes ------//
-    Route::get('/register', [RegisterController::class, 'create'])->name('register');
-    Route::post('/register', [RegisterController::class, 'store']);
+    Route::get('register', [RegisteredUserController::class, 'create'])
+        ->name('register');
 
-    //------ Login Routes ------//
-    Route::get('/login', [AuthenticateController::class, 'create'])->name('login');
-    Route::post('/login', [AuthenticateController::class, 'store']);
+    Route::post('register', [RegisteredUserController::class, 'store']);
 
-    //------ Reset password ------//
-    Route::get('/forgot-password', [ResetPasswordController::class, 'requestPass'])->name('password.request');
-    Route::post('/forgot-password', [ResetPasswordController::class, 'sendEmail'])->name('password.email');
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+        ->name('login');
 
-    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'resetForm'])->name('password.reset');
-    Route::post('/reset-password', [ResetpasswordController::class, 'resetHandler'])->name('password.update');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {
-    //----- Logout Route ------//
-    Route::post('/logout', [AuthenticateController::class, 'destroy'])->name('logout');
-
-    //----- Email sending/verification -----//
-    Route::get('/email/verify', [EmailVerificationController::class, 'notice'])
-            ->name('verification.notice');
-
-    Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'handler'])
-            ->middleware('signed')->name('verification.verify');
-
-    Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])
-            ->middleware('throttle:6,1')->name('verification.send');
-
-    //------ Password confirmation ------//
-    Route::get('/confirm-password', [ConfirmPasswordController::class, 'create'])->name('password.confirm');
-    Route::post('/confirm-password', [ConfirmPasswordController::class, 'store'])->middleware('throttle:6,1');
-
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->name('logout');
 });
 
 
