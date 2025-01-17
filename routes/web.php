@@ -48,6 +48,6 @@ Route::middleware(['auth', 'verified', Admin::class])
 
 
 // imported routes from self created Auth.php file
-require __DIR__ . '/auth.php';
+require base_path('routes/auth.php');
 
 
