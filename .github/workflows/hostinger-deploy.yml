@@ -92,13 +92,15 @@ jobs:
           port: 22
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            cd public_html
+            cd /home/${{ secrets.SSH_USERNAME }}/public_html
             git fetch --all
             if [ "${{ github.event_name }}" = "release" ]; then
               git checkout ${{ github.event.release.tag_name }}
             else
               git pull origin main
             fi
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             composer install --no-dev --optimize-autoloader
             npm ci
             npm run build
