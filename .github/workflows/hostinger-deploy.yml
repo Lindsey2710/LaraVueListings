@@ -14,11 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Verify Routes Directory
+      - name: Debug Repository Contents
         run: |
-          mkdir -p routes
+          pwd
+          ls -la
           ls -la routes/
-          cp routes/auth.php routes/auth.php || echo "auth.php already exists"
+          cat routes/auth.php
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
