@@ -19,7 +19,7 @@ jobs:
           pwd
           ls -la
           ls -la routes/
-          cat routes/auth.php
+          cat routes/Auth.php || true
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
