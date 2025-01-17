@@ -32,7 +32,7 @@ const toggleApprove = () => {
     <div v-if="$page.props.auth.user && $page.props.auth.user.role === 'admin'"
         class="bg-indigo-950 text-white mb-6 p-4 md:p-6 rounded-md flex flex-col md:flex-row items-center gap-4 md:justify-between">
         <p class="font-bold text-center md:text-left">This list item is {{ listing.approved ? 'Approved' : 'Disapproved' }}</p>
-        <button @click.prevent="toggleApprove" class="bg-indigo-400 px-3 py-1 rounded-md">
+        <button @click.prevent="toggleApprove" class="bg-indigo-400 px-3 py-1 rounded-md w-full md:w-auto">
             {{ listing.approved ? 'Disapprove it' : 'Approve it' }}
         </button>
     </div>
@@ -43,7 +43,7 @@ const toggleApprove = () => {
             <img :src="listing.image
                 ? `/storage/${listing.image}`
                 : '/storage/images/listing/default.jpg'" 
-                class="w-full h-48 object-cover object-center" alt="">
+                class="w-full h-48 md:h-full object-cover object-center" alt="">
         </div>
 
         <!-- Content container -->
@@ -54,17 +54,19 @@ const toggleApprove = () => {
                     <p class="text-indigo-950 dark:text-indigo-100 w-full border-b">List item details</p>
 
                     <!-- Edit and delete buttons -->
-                    <div v-if="canModify" class="pt-4 md:pt-0 md:pl-4 flex items-center gap-4">
+                    <div v-if="canModify" class="pt-4 md:pt-0 md:pl-4 flex items-center gap-4 w-full md:w-auto">
                         <Link
                             :href="route('listing.edit', listing.id)"
-                            class="bg-green-600 rounded-md text-white px-6 py-2 hover:outline outline-green-600 outline-offset-2">
+                            class="flex-1 md:flex-none text-center bg-green-600 rounded-md text-white px-6 py-2 hover:outline outline-green-600 outline-offset-2"
+                        >
                             Edit
                         </Link>
 
                         <button
                             @click="deleteListing"
                             type="button"
-                            class="bg-red-600 rounded-md text-white px-6 py-2 hover:outline outline-red-600 outline-offset-2">
+                            class="flex-1 md:flex-none bg-red-600 rounded-md text-white px-6 py-2 hover:outline outline-red-600 outline-offset-2"
+                        >
                             Delete
                         </button>
                     </div>
@@ -79,24 +81,30 @@ const toggleApprove = () => {
                 <p class="text-indigo-950 dark:text-indigo-100 w-full border-b mb-2">General info</p>
 
                 <!-- Email -->
-                <div v-if="listing.email" class="flex items-center mb-2 gap-2 break-all">
-                    <i class="fa-solid fa-envelope min-w-[1rem]"></i>
-                    <p>Email: </p>
-                    <a :href="`mailto:${listing.email}`" class="text-link">{{ listing.email }}</a>
+                <div v-if="listing.email" class="flex flex-col sm:flex-row items-start sm:items-center mb-2 gap-1 sm:gap-2 break-all">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-envelope min-w-[1rem]"></i>
+                        <p>Email:</p>
+                    </div>
+                    <a :href="`mailto:${listing.email}`" class="text-link ml-6 sm:ml-0">{{ listing.email }}</a>
                 </div>
 
                 <!-- Link -->
-                <div v-if="listing.link" class="flex items-center mb-2 gap-2 break-all">
-                    <i class="fa-solid fa-globe min-w-[1rem]"></i>
-                    <p>Link: </p>
-                    <a :href="listing.link" target="_blank" class="text-link">{{ listing.link }}</a>
+                <div v-if="listing.link" class="flex flex-col sm:flex-row items-start sm:items-center mb-2 gap-1 sm:gap-2 break-all">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-globe min-w-[1rem]"></i>
+                        <p>Link:</p>
+                    </div>
+                    <a :href="listing.link" target="_blank" class="text-link ml-6 sm:ml-0">{{ listing.link }}</a>
                 </div>
 
                 <!-- User -->
-                <div class="flex items-center mb-2 gap-2">
-                    <i class="fa-solid fa-user-check min-w-[1rem]"></i>
-                    <p>Listed by: </p>
-                    <Link :href="route('home', { user_id: user.id })" class="text-link">{{ user.name }}</Link>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center mb-2 gap-1 sm:gap-2">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-user-check min-w-[1rem]"></i>
+                        <p>Listed by:</p>
+                    </div>
+                    <Link :href="route('home', { user_id: user.id })" class="text-link ml-6 sm:ml-0">{{ user.name }}</Link>
                 </div>
             </div>
 

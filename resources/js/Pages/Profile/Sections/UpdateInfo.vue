@@ -35,13 +35,23 @@ const resendEmail = (e) => {
         <ErrorMessages :errors="form.errors" />
 
         <form class="space-y-6" @submit.prevent="form.patch(route('profile.info'))">
-            <InputField label="Name" icon="id-badge" class="w-1/2" v-model="form.name" />
+            <InputField 
+                label="Name" 
+                icon="id-badge" 
+                class="w-full md:w-1/2" 
+                v-model="form.name" 
+            />
 
-            <InputField label="Email" icon="envelope" class="w-1/2" v-model="form.email" />
+            <InputField 
+                label="Email" 
+                icon="envelope" 
+                class="w-full md:w-1/2" 
+                v-model="form.email" 
+            />
 
             <div v-if="user.email_verified_at === null">
                 <SessionMessages :status="status" />
-                <p>
+                <p class="text-sm sm:text-base">
                     Your email address is unverified.
                     <button
                         @click="resendEmail"
@@ -49,12 +59,15 @@ const resendEmail = (e) => {
                         dark:text-purple-100 disabled:cursor-wait">
                         Click here to resend the verification email.
                     </button>
-
                 </p>
-
             </div>
 
-            <PrimaryBtn :disabled="form.processing">Save</PrimaryBtn>
+            <PrimaryBtn 
+                :disabled="form.processing"
+                class="w-full md:w-auto"
+            >
+                Save
+            </PrimaryBtn>
         </form>
     </Container>
 </template>

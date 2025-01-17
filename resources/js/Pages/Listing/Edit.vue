@@ -33,27 +33,27 @@ const form = useForm({
 
         <ErrorMessages :errors="form.errors" />
 
-        <form @submit.prevent="form.post(route('listing.update', listing.id))" class="grid grid-cols-2 gap-6">
+        <form @submit.prevent="form.post(route('listing.update', listing.id))" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-6">
                 <Inputfield
                     label="Title"
                     icon="heading"
                     placeholder="My New Listing"
                     v-model="form.title"
-                     />
+                />
 
                 <Inputfield
                     label="Tags (separated by commas)"
                     icon="tags"
                     placeholder="books, movies, websites"
                     v-model="form.tags"
-                     />
+                />
                 <TextArea
                     label="Description"
                     icon="file-lines"
                     placeholder="This Is The Description"
                     v-model="form.desc"
-                     />
+                />
             </div>
 
             <div class="space-y-6">
@@ -62,21 +62,23 @@ const form = useForm({
                     icon="envelope"
                     placeholder="example@email.com"
                     v-model="form.email"
-                     />
+                />
 
                 <Inputfield
                     label="ExternalLink"
                     icon="globe"
                     placeholder="https://www.mywebsite.com"
                     v-model="form.link"
-                     />
+                />
 
-                <ImageUpload @image="(e) => (form.image = e)"
-                    :listingImage="listing.image" />
+                <ImageUpload 
+                    @image="(e) => (form.image = e)"
+                    :listingImage="listing.image" 
+                />
             </div>
 
-            <div>
-                <PrimaryBtn :disabled="form.processing">Update</PrimaryBtn>
+            <div class="md:col-span-2">
+                <PrimaryBtn :disabled="form.processing" class="w-full md:w-auto">Update</PrimaryBtn>
             </div>
         </form>
     </Container>

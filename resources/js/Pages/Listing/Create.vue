@@ -28,7 +28,7 @@ const form = useForm({
 
         <ErrorMessages :errors="form.errors" />
 
-        <form @submit.prevent="form.post(route('listing.store'))" class="grid grid-cols-2 gap-6">
+        <form @submit.prevent="form.post(route('listing.store'))" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-6">
                 <Inputfield
                     label="Title"
@@ -69,8 +69,8 @@ const form = useForm({
                 <ImageUpload @image="(e) => (form.image = e)" />
             </div>
 
-            <div>
-                <PrimaryBtn :disabled="form.processing">Create</PrimaryBtn>
+            <div class="md:col-span-2">
+                <PrimaryBtn :disabled="form.processing" class="w-full md:w-auto">Create</PrimaryBtn>
             </div>
         </form>
     </Container>

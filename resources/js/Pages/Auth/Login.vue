@@ -39,19 +39,16 @@ const submit = () => {
         </div>
 
         <!-- Errors messages -->
-         <ErrorMessages :errors="form.errors" />
-         <SessionMessages :status="status" />
+        <ErrorMessages :errors="form.errors" />
+        <SessionMessages :status="status" />
 
         <form @submit.prevent="submit" class="space-y-6 max-w-full">
-
             <InputField label="Email" icon="envelope" type="email" v-model="form.email" />
 
             <InputField label="Password" icon="key" type="password" v-model="form.password" />
 
             <div class="flex items-center justify-between">
-
                 <Checkbox name="remember" v-model="form.remember">Remember me</Checkbox>
-
                 <TextLink routeName="password.request" label="Forgot Password?" />
             </div>
 

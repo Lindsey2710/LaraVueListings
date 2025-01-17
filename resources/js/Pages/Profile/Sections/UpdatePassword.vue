@@ -34,15 +34,43 @@ const submit = () => {
         <ErrorMessages :errors="form.errors" />
 
         <form class="space-y-6" @submit.prevent="submit">
-            <InputField label="Current Password" icon="key" type="password" class="w-1/2" v-model="form.current_password" />
+            <InputField 
+                label="Current Password" 
+                icon="key" 
+                type="password" 
+                class="w-full md:w-1/2" 
+                v-model="form.current_password" 
+            />
 
-            <InputField label="New Password" icon="key" type="password" class="w-1/2" v-model="form.password" />
+            <InputField 
+                label="New Password" 
+                icon="key" 
+                type="password" 
+                class="w-full md:w-1/2" 
+                v-model="form.password" 
+            />
 
-            <InputField label="Confirm Password" icon="key" type="password" class="w-1/2" v-model="form.password_confirmation" />
+            <InputField 
+                label="Confirm Password" 
+                icon="key" 
+                type="password" 
+                class="w-full md:w-1/2" 
+                v-model="form.password_confirmation" 
+            />
 
-                <p v-if="form.recentlySuccessful" class="text-green-600 font-medium">Saved!</p>
+            <p 
+                v-if="form.recentlySuccessful" 
+                class="text-green-600 font-medium text-sm sm:text-base"
+            >
+                Saved!
+            </p>
 
-            <PrimaryBtn :disabled="form.processing">Save</PrimaryBtn>
+            <PrimaryBtn 
+                :disabled="form.processing"
+                class="w-full md:w-auto"
+            >
+                Save
+            </PrimaryBtn>
         </form>
     </Container>
 </template>

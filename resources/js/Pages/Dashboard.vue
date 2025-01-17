@@ -25,7 +25,7 @@ const deleteListing = (id) => {
         <div v-if="Object.keys(listings.data).length">
             <div>
                 <!-- Heading -->
-                <div class="flex items-center justify-between mb-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
                     <Title>Your latest list items</Title>
 
                     <div class="flex items-center gap-4 text-xs">
@@ -34,8 +34,47 @@ const deleteListing = (id) => {
                     </div>
                 </div>
 
-                <!-- Table -->
-                <table class="w-full table-fixed border-collapse overflow-hidden rounded-lg
+                <!-- Mobile Cards (visible on small screens) -->
+                <div class="sm:hidden space-y-4">
+                    <div v-for="listing in listings.data" 
+                         :key="listing.id" 
+                         class="bg-white dark:bg-indigo-800 p-4 rounded-lg ring-2 ring-indigo-300 dark:ring-indigo-800 shadow-lg">
+                        <div class="flex gap-3 mb-4">
+                            <img class="w-20 h-auto"
+                                :src="listing.image ? `/storage/${listing.image}` : `/storage/images/listing/default.jpg`"
+                                alt="">
+                            <h4 class="font-bold">
+                                {{ listing.title }}
+                                <i :class="`fa-solid fa-${listing.approved ? 'circle-check text-green-600' : 'circle-xmark text-orange-500'}`"></i>
+                            </h4>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <Link 
+                                v-if="listing.approved" 
+                                :href="route('listing.show', listing.id)" 
+                                class="bg-orange-600 rounded-md text-white px-6 py-2 hover:outline outline-orange-600 outline-offset-2"
+                            >
+                                View
+                            </Link>
+                            <Link 
+                                :href="route('listing.edit', listing.id)" 
+                                class="bg-green-600 rounded-md text-white px-6 py-2 hover:outline outline-green-600 outline-offset-2"
+                            >
+                                Edit
+                            </Link>
+                            <button 
+                                @click="deleteListing(listing.id)" 
+                                type="button" 
+                                class="bg-red-600 rounded-md text-white px-6 py-2 hover:outline outline-red-600 outline-offset-2"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Table (hidden on small screens) -->
+                <table class="hidden sm:table w-full table-fixed border-collapse overflow-hidden rounded-lg
                             text-sm ring-2 ring-indigo-300 dark:ring-indigo-800 bg-white shadow-2xl">
                     <thead
                         class="bg-indigo-200 text-xs uppercase dark:bg-indigo-900 text-indigo-950 dark:text-indigo-200">
@@ -96,12 +135,12 @@ const deleteListing = (id) => {
             </div>
 
         </div>
-        <div v-else>
+        <div v-else class="text-center py-8">
             You have no list items yet! Start creating some now.
         </div>
 
     </div>
-    <div v-else class="">
+    <div v-else class="text-center py-8">
         Due to violation of our terms and conditions, your account has been suspended.
         Please contact us for more information at
         <a class="text-link" href="mailto:lindseyverbauwhede@linkatver.com">info@linkatver.com</a>.

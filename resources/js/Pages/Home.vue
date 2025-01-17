@@ -28,48 +28,52 @@ const search = () => {
 
     <Head title=" - Latest Listings" />
 
-    <div class="flex items-center justify-between mb-4">
-        <div class="flex items-center gap-2">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-4">
+        <div class="flex flex-wrap items-center gap-2">
             <Link
-                class="px-2 py-1 rounded-lg bg-indigo-600 text-white flex items-center gap-2 hover:bg-indigo-950"
+                class="px-2 py-1 rounded-lg bg-indigo-600 text-white flex items-center gap-2 hover:bg-indigo-950 text-sm"
                 v-if="params.tag"
-                :href="route('home',
-                { ...params, tag: null, page: null })"
-                >
+                :href="route('home', { ...params, tag: null, page: null })"
+            >
                 {{ params.tag }}
                 <i class="fa-solid fa-xmark"></i>
             </Link>
 
             <Link
-                class="px-2 py-1 rounded-lg bg-indigo-600 text-white flex items-center gap-2 hover:bg-indigo-950"
+                class="px-2 py-1 rounded-lg bg-indigo-600 text-white flex items-center gap-2 hover:bg-indigo-950 text-sm"
                 v-if="params.search"
-                :href="route('home',
-                { ...params, search: null, page: null })"
-                >
+                :href="route('home', { ...params, search: null, page: null })"
+            >
                 {{ params.search }}
                 <i class="fa-solid fa-xmark"></i>
             </Link>
 
             <Link
-                class="px-2 py-1 rounded-lg bg-indigo-600 text-white flex items-center gap-2 hover:bg-indigo-950"
+                class="px-2 py-1 rounded-lg bg-indigo-600 text-white flex items-center gap-2 hover:bg-indigo-950 text-sm"
                 v-if="params.user_id"
-                :href="route('home',
-                { ...params, user_id: null, page: null })"
-                >
+                :href="route('home', { ...params, user_id: null, page: null })"
+            >
                 {{ username }}
                 <i class="fa-solid fa-xmark"></i>
             </Link>
         </div>
 
-        <div class="w-1/4">
+        <div class="w-full sm:w-1/4">
             <form @submit.prevent="search">
-                <InputField type="search" label="" icon="search" placeholder="Search..." v-model="form.search" />
+                <InputField 
+                    type="search" 
+                    label="" 
+                    icon="search" 
+                    placeholder="Search..." 
+                    v-model="form.search"
+                    class="w-full" 
+                />
             </form>
         </div>
     </div>
 
-    <div v-if="Object.keys(listings).length" class="">
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div v-if="Object.keys(listings).length">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div v-for="listing in listings.data" :key="listing.id">
                 <Card :listing="listing" />
             </div>
@@ -80,7 +84,7 @@ const search = () => {
         </div>
     </div>
 
-    <div v-else>
+    <div v-else class="text-center py-8">
         No Listings Yet
     </div>
 </template>
