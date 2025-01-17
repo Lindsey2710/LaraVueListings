@@ -10,6 +10,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: ${{ secrets.DB_DATABASE }}
+          MYSQL_USER: ${{ secrets.DB_USERNAME }}
+          MYSQL_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,7 +50,11 @@ jobs:
           node-version: 20
 
       - name: Copy .env
-        run: cp .env.example .env
+        run: |
+          cp .env.example .env
+          sed -i 's/DB_DATABASE=.*$/DB_DATABASE=${{ secrets.DB_DATABASE }}/' .env
+          sed -i 's/DB_USERNAME=.*$/DB_USERNAME=${{ secrets.DB_USERNAME }}/' .env
+          sed -i 's/DB_PASSWORD=.*$/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/' .env
 
       - name: Install Composer Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -55,6 +76,12 @@ jobs:
 
       - name: Run Tests
         run: php artisan test
+
+      - name: Run Migrations
+        run: php artisan migrate --force
+
+      - name: Run Database Seeder
+        run: php artisan db:seed
 
       - name: Deploy to Hostinger
         if: ${{ success() }}
